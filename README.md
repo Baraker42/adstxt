@@ -1,6 +1,4 @@
-# adstxt
-Script pro porovnání dvou souborů.
-
-## Pro správnou funkčnost je třeba mít nainstalovaný python
-### Ze stránky si zkopíruješ aktuální ads.txt do souboru klient
+## Pro správnou funkčnost je třeba mít nainstalovaný python https://www.python.org/
+## Stáhni si zip soubor pomocí zeleného tlačítka Code
+### Ze stránky si zkopíruješ aktuální ads.txt do souboru klient.txt
 ### Po spuštění ads.py se vytvoří nový soubor, který obsahuje pouze ads, které na stránce chybí
