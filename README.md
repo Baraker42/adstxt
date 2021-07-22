@@ -2,6 +2,7 @@
 ## Jedná se o testovací verzi, radši trochu kontrolovat, že je to v pořádku. 
 ## Stáhni si zip soubor pomocí zeleného tlačítka Code
 ### Ze stránky, kterou chceš porovnat, si překopíruješ aktuální ads.txt do souboru klient.txt
+### Nepřejmenovávat txt soubory jinak to nebude fungovat
 ### Hlídat si, že nase.txt obsahuje aktuální ads.txt
 ### Po spuštění ads.py se vytvoří nový soubor ads.txt, který obsahuje pouze řádky, které na stránce chybí
 #### Nápady a bugy hlásit prosím :-)
