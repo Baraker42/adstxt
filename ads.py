@@ -20,8 +20,20 @@ for i in lines2:
 
 #porovná ads.txt ze stránky a vytvoří nový soubor s ads, které na stránce chybí
 try:
+    with open("ads.txt") as f:
+        lines=f.readlines()
     os.remove("ads.txt")
-except:
+    counter=0
+    newads=[]
+    for i in firstads:
+        if firstads[counter] not in secondads:
+            newads.append(firstads[counter])
+            file= open("ads.txt", "a")
+            file.write(firstads[counter])
+        counter +=1
+
+    file.close()
+except FileNotFoundError:
     counter=0
     newads=[]
     for i in firstads:
