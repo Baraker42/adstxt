@@ -4,6 +4,11 @@
 ### Ze stránky, kterou chceš porovnat, si překopíruješ aktuální ads.txt do souboru klient.txt
 ### Nepřejmenovávat txt soubory jinak to nebude fungovat
 ### Hlídat si, že nase.txt obsahuje aktuální ads.txt
-### Po spuštění ads.py se vytvoří nový soubor ads.txt, který obsahuje pouze řádky, které na stránce chybí
+### Po spuštění ads.py / upgrade.py se vytvoří nový soubor ads.txt, který obsahuje pouze řádky, které na stránce chybí
 #### Nápady a bugy hlásit prosím :-)
 
+V repozitáři se nachází 3 verze programu:
+  ads.py, která vyžaduje přítomnost souborů nase.txt a klient.txt
+  upgrade.py, která si nase.txt nahraje z aktuálního souboru pomocí url
+  Ralph.exe, který po spuštění vyvolá konzoli, do které se zadá adresa s klientskými ads a Ralph se o vše postará
+  (Ralph.exe má svůj vlastní repozitář(https://github.com/Baraker42/Ralph), takže sem brzy umístím pouze ralph.py se zdrojovým kódem
