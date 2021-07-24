@@ -10,6 +10,6 @@
 V repozitáři se nachází 3 verze programu:<br>
   -ads.py, která vyžaduje přítomnost souborů nase.txt a klient.txt<br>
   -upgrade.py, která si nase.txt nahraje z aktuálního souboru pomocí url<br>
-  -Ralph.exe, který po spuštění vyvolá konzoli, do které se zadá adresa s klientskými ads a Ralph se o vše postará<br>
+  -Ralph.py, který po spuštění vyvolá konzoli, do které se zadá adresa s klientskými ads a Ralph se o vše postará(je potřeba mít nainstalovaný Tkinter<br>
   <br>
-  (Ralph.exe má svůj vlastní repozitář(https://github.com/Baraker42/Ralph), takže sem brzy umístím pouze ralph.py se zdrojovým kódem<br>
+  (Ralph.exe má svůj vlastní repozitář(https://github.com/Baraker42/Ralph)
