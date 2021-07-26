@@ -5,10 +5,11 @@ from tkinter import *
 def transcript(line):
     newlist=[]
     for i in line:
+
         if isinstance(i, bytes):
             i=i.decode('utf-8')
         if "#" not in i:
-                newlist.append(i)
+            newlist.append(i)
     return newlist
 #funkce pro porovnání ads.txt souborů
 def check_ads():
@@ -20,22 +21,27 @@ def check_ads():
             file.write(i)
         else:
             continue
+    try:
+        file.close()
+    except:
+        all_rigth = Label(root, fg="green", text="Na webu jsou všechna potřebná ads.txt" )
+        all_rigth.grid(row=4, column=0)
 
-    file.close()
 
 def wiggum(i):
-    client_url=(i)
-
-    client_ads = urllib.request.urlopen(client_url)
+    print(i)
+    global clientlist
+    client_ads = urllib.request.urlopen(i)
+    clientlist = transcript(client_ads)
     our_ads = urllib.request.urlopen("https://cdn.performax.cz/yi/ads-txt/px-uni-ads.txt")
+
     #provede přepis z url do listu
     global ourlist
-    global clientlist
+
     ourlist = transcript(our_ads)
 
 
-#provede přepis z klient.txt do listu
-    clientlist = transcript(client_ads)
+
     try:
 
         with open("ads.txt") as f:
