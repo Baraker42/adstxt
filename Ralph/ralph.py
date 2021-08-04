@@ -8,10 +8,16 @@ def transcript(line):
     for i in line:
         if isinstance(i, bytes):
             i=i.decode('utf-8')
+
+        #tady dochází ke sjednocení řádků, aby mohlo docházet ke správnému porovnání
         if "#" not in i:
             if "\n" not in i:
                 i=i+"\n"
+            #při určitém řádkování se objeví \r\r na konci řádku a nemůže dojít k jeho správnému porovnání, tato část skriptu to řeší
+            if "\r" in i:
+                i=i.replace("\r\r","")
             newlist.append(i)
+
     return newlist
 
 #nová featura která kontroluje, zda na stránce nejsou duplicitní ads.txt
@@ -44,9 +50,10 @@ def check_ads():
         all_rigth = Label(root, fg="green", text="Na webu jsou všechna potřebná ads.txt" )
         all_rigth.grid(row=4, column=0)
 
+#funkce připraví text, který slouží k pojmenování souboru, aby byl větší pořádek v souboru, kde se používá a nedocházelo zbytečně k přepisování
 def make_client_tag(i):
     client_url = i.split("/")
-    checkbox=["http:","ads.txt","www","https:"]
+    checkbox=["http:","ads.txt","www","https:","ads","txt"]
     for i in client_url:
         if i not in checkbox and len(i) > 4:
             client_tag=i.replace(".","")
@@ -56,18 +63,31 @@ def make_client_tag(i):
 def wiggum(i):
     print (i)
     global clientlist
-    client_ads = urllib.request.urlopen(i)
+
+    #tato část skriptu výrazně zjednodušuje vyhledávání, protože stačí napsat čast adresy bez https a ads.txt
+    try:
+        client_ads = urllib.request.urlopen(i)
+    except ValueError:
+        make_url="https://"+i+"/ads.txt"
+    try:
+        client_ads = urllib.request.urlopen(make_url)
+    except:
+        no_https="http://"+i+"/ads.txt"
+        client_ads = urllib.request.urlopen(no_https)
+
+    #volá funkce, které přepíšou klientské url do listu a připraví text pro pojmenování souboru
     clientlist = transcript(client_ads)
-    global ads
     client_tag = make_client_tag(i)
-    ads = client_tag+".txt"
+
+    #připraví tagy pro ads.txt a duplicitu
+    global ads
     global duplicity
+    ads = client_tag+".txt"
     duplicity = client_tag +"_duplicity.txt"
+
+    #provede přepis z url do listu pro naše ads.txt
     our_ads = urllib.request.urlopen("https://cdn.performax.cz/yi/ads-txt/px-uni-ads.txt")
-
-    #provede přepis z url do listu
     global ourlist
-
     ourlist = transcript(our_ads)
 
 #vytvoří txt, které obsahuje ads.txt, které má klient na svém webu vícekrát a pokud už nějaký existuje, tak ho vymaže
@@ -102,7 +122,7 @@ def wiggum(i):
 root =Tk()
 root.title("Ralph")
 root.tk.call('wm', 'iconphoto', root._w,PhotoImage(file='ralph.png'))
-entry=Label(root,text="Vložte klientské url s ads.txt")
+entry=Label(root,text="Vložte klientské url s ads.txt nebo pouze základní stránku")
 url_entry=Entry(root,width=50,borderwidth=5)
 url_button=Button(root, text="Vložit", command=lambda:wiggum(url_entry.get()))
 #global done_info
