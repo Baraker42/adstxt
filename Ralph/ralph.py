@@ -16,6 +16,7 @@ def transcript(line):
             #při určitém řádkování se objeví \r\r na konci řádku a nemůže dojít k jeho správnému porovnání, tato část skriptu to řeší
             if "\r" in i:
                 i=i.replace("\r\r","")
+            i=i.replace(" ","")
             newlist.append(i)
 
     return newlist
@@ -38,12 +39,15 @@ def duplicity_test(newlist):
 def check_ads():
     newads=[]
     for i in ourlist:
+
         if i not in clientlist and i != "\n":
+            i=i.replace(",",", ")
             newads.append(i)
             file= open(ads, "a")
             file.write(i)
         else:
             continue
+    
     try:
         file.close()
     except:
@@ -77,6 +81,7 @@ def wiggum(i):
 
     #volá funkce, které přepíšou klientské url do listu a připraví text pro pojmenování souboru
     clientlist = transcript(client_ads)
+    
     client_tag = make_client_tag(i)
 
     #připraví tagy pro ads.txt a duplicitu
@@ -89,7 +94,7 @@ def wiggum(i):
     our_ads = urllib.request.urlopen("https://cdn.performax.cz/yi/ads-txt/px-uni-ads.txt")
     global ourlist
     ourlist = transcript(our_ads)
-
+    
 #vytvoří txt, které obsahuje ads.txt, které má klient na svém webu vícekrát a pokud už nějaký existuje, tak ho vymaže
     try:
         with open(duplicity) as f:
